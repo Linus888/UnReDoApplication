@@ -8,22 +8,21 @@ using System.Xml.Linq;
 
 namespace WpfApplication3.ViewModel
 {
-    class DeleteCommand : ICommand
+    class DeleteCommand : BaseCommand
     {
         public ObservableCollection<string> DataLocation { get; set; }
         public string Data { get; set; }
-        public bool IsSelected { get; set; }
         public int ListPosition { get; set; }
-        public void Execute()
+        public override void Execute()
         {
             ListPosition = DataLocation.IndexOf(Data);
             DataLocation.Remove(Data);
         }
 
-        public void UnExecute()
+        public override void UnExecute()
         {
-            DataLocation.Insert(ListPosition,Data);
-           
+            DataLocation.Insert(ListPosition, Data);
+
         }
     }
 }

@@ -41,6 +41,16 @@ namespace WpfApplication3.ViewModel
             HistoryViewModel dialog = new HistoryViewModel();
             dialog.HistoryStack = UnDoStack;
             dialog.ShowDialogWindow();
+            foreach (var command in dialog.HistoryStack)
+            {
+                var currentCommand = command as BaseCommand;
+                if (currentCommand != null && !currentCommand.IsSelected)
+                {
+                    currentCommand.UnExecute();
+                }
+            }
+            UnDoStack.Clear();
+            ReDoStack.Clear();
         }
 
         public RelayCommand SaveCommand { get; set; }
